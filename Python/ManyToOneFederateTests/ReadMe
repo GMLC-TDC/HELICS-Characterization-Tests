@@ -1,11 +1,7 @@
 Created on Dec 20
 @kris756
 
-<<<<<<< HEAD
-This script describes the logic to run this many to one federate simulation using python API and commands to run.
 
-=======
->>>>>>> 77ba36b1228ddd5f70d6d045f97316c457e98614
 This test co-simulates a sender and an echoer script.
 Multiple senders publish messages (a variable) to one echoer and the echoer publishes back the messages received to the corresponding sender.
 
