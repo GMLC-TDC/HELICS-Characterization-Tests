@@ -1,0 +1,26 @@
+created on Dec 20
+
+@kris756
+
+This script describes the logic to run this meshed topology federate simulation using python API and commands to run.
+
+This test co-simulates multiple federates talking to each other.
+Multiple senders publish messages (a variable) to their connections and the connected federates subscribe to those messages.
+
+There are multiple variables involved in this process:
+  1. number of federates
+  2. number of messages per sender
+  3. number of bytes per message per sender
+  4. number of connections to each federate (should be less than the number of federates)
+  4. the update interval (timeDelta) of the helics co-simulation
+  5. the stop-time of the co-simulation
+  6. the core-type used (ZMQ, TCP, UDP, IP, MPI)
+These inputs are passed as arguments in creating the JSON configuration script.
+
+Running the meshGen.sh script returns,
+1.	 the JSON files to create the HELICS federates and 
+2.	 config_runner.json script that is used by helics runner. This file for now is saved in the log_files folder
+3.   starts the helics runner simualtion with the helics config_runner script.
+
+Command to run this shell script : ./meshGen.sh 10 1 1 9 10 1000 zmq (the arguments are sequentially : number of federates, number of messages/federate, number of bytes/message, number of connections, timeDelta, time_stop, coreType)
+

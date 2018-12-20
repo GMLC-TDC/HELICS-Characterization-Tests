@@ -1,21 +1,32 @@
 #======================================== commands to run the scripts ==================================================================#
 #commands to run the json & runner-creator -  python Json_create.py 10 1 1 10 30 zmq
-#commands to run the helics runner - time -p helics run --path /home/kris756/HELICS_scalability_tests/JSON_scriptgenerator/log_files/config_runner.json
+#commands to run the helics runner - time -p helics run --path/ to/ config_runner.json
 #=======================================================================================================================================#
 
 import sys 
 import os
 import json
+import random
+import shutil
 from json_tricks import loads
 from json_tricks import dumps
 from json_tricks import dump
+
+cwd = os.getcwd()
+test = os.listdir(cwd)
+
+for item in test:
+    if item.endswith(".json"):
+        os.remove(os.path.join(cwd, item))
+        
+shutil.rmtree("log_files", ignore_errors=True)
 
 #===============================================Input arguments and variable initializations ===========================================#
 sender_number=int(sys.argv[1])     #input --  sender number
 message_number=int(sys.argv[2])    #input -- number of sender message
 number_bytes = int(sys.argv[3])    #input -- value
 update_interval=float(sys.argv[4]) #input -- update interval
-time_stop=float(sys.argv[5])       # stop time
+time_stop=float(sys.argv[5])       #stop time
 core_type=str(sys.argv[6])
 
 sub_name=[]
@@ -134,9 +145,10 @@ with open('JSONData_EchoFed.json', 'w') as f:
 #                                  Creating helics runner script - Config_runner.json
 #============================================================================================================================================#
 
-cwd = os.getcwd()
-dir=cwd +'/log_files/config_runner.json'
-file = open(dir, "w")
+filepath = os.path.join(cwd +'/log_files', 'config_runner.json')
+if not os.path.exists(cwd +'/log_files'):
+    os.makedirs(cwd +'/log_files')
+file = open(filepath, "w")
 
 #config_echoer
 file.write('{\n')
